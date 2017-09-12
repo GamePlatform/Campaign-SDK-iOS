@@ -6,5 +6,6 @@ target 'CampaignPlatform' do
   # use_frameworks!
 
   # Pods for CampaignPlatform
+  pod 'AFNetworking'
 
 end
