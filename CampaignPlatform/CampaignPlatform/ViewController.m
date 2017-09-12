@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [[APIManager sharedManager] getCampaigns:kInformStr appID:@"1" locationID:@"main" success:^(NSURLSessionTask *task, id obj) {
+        DLog(@"%@", obj);
+    } failFromServer:nil completion:nil];
 }
 
 

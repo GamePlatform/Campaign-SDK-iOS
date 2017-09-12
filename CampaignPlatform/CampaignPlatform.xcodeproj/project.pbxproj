@@ -16,6 +16,9 @@
 		646864671F6689F00086D39E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646864651F6689F00086D39E /* LaunchScreen.storyboard */; };
 		646864711F6698CC0086D39E /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 646864701F6698CC0086D39E /* CampaignViewController.m */; };
 		646864731F6698E70086D39E /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 646864721F6698E70086D39E /* popup.html */; };
+		64D9C5F01F67AD35004486D7 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5EF1F67AD35004486D7 /* APIManager.m */; };
+		64D9C5F41F67ADD1004486D7 /* UtilForDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5F31F67ADD1004486D7 /* UtilForDebug.m */; };
+		64D9C5FD1F67B1B9004486D7 /* UIViewController+Campaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5FC1F67B1B9004486D7 /* UIViewController+Campaign.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,13 @@
 		6468646F1F6698CC0086D39E /* CampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CampaignViewController.h; path = Campaign/CampaignViewController.h; sourceTree = "<group>"; };
 		646864701F6698CC0086D39E /* CampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CampaignViewController.m; path = Campaign/CampaignViewController.m; sourceTree = "<group>"; };
 		646864721F6698E70086D39E /* popup.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = popup.html; path = Campaign/popup.html; sourceTree = "<group>"; };
+		64D9C5EE1F67AD35004486D7 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		64D9C5EF1F67AD35004486D7 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		64D9C5F21F67ADD1004486D7 /* UtilForDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilForDebug.h; sourceTree = "<group>"; };
+		64D9C5F31F67ADD1004486D7 /* UtilForDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilForDebug.m; sourceTree = "<group>"; };
+		64D9C5F51F67AE0F004486D7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		64D9C5FB1F67B1B9004486D7 /* UIViewController+Campaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Campaign.h"; sourceTree = "<group>"; };
+		64D9C5FC1F67B1B9004486D7 /* UIViewController+Campaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Campaign.m"; sourceTree = "<group>"; };
 		D8BB91357D6E920C70D8573D /* libPods-CampaignPlatform.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CampaignPlatform.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,11 +97,13 @@
 		646864561F6689F00086D39E /* CampaignPlatform */ = {
 			isa = PBXGroup;
 			children = (
+				64D9C5EC1F67AD35004486D7 /* Utils */,
 				6468646E1F6698AB0086D39E /* Campaign */,
 				6468645A1F6689F00086D39E /* AppDelegate.h */,
 				6468645B1F6689F00086D39E /* AppDelegate.m */,
 				6468645D1F6689F00086D39E /* ViewController.h */,
 				6468645E1F6689F00086D39E /* ViewController.m */,
+				64D9C5F51F67AE0F004486D7 /* PrefixHeader.pch */,
 				646864601F6689F00086D39E /* Main.storyboard */,
 				646864631F6689F00086D39E /* Assets.xcassets */,
 				646864651F6689F00086D39E /* LaunchScreen.storyboard */,
@@ -117,6 +129,43 @@
 				646864701F6698CC0086D39E /* CampaignViewController.m */,
 			);
 			name = Campaign;
+			sourceTree = "<group>";
+		};
+		64D9C5EC1F67AD35004486D7 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				64D9C5FA1F67B1B9004486D7 /* Category */,
+				64D9C5F11F67ADD1004486D7 /* Debug */,
+				64D9C5ED1F67AD35004486D7 /* APIManager */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		64D9C5ED1F67AD35004486D7 /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				64D9C5EE1F67AD35004486D7 /* APIManager.h */,
+				64D9C5EF1F67AD35004486D7 /* APIManager.m */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
+		64D9C5F11F67ADD1004486D7 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				64D9C5F21F67ADD1004486D7 /* UtilForDebug.h */,
+				64D9C5F31F67ADD1004486D7 /* UtilForDebug.m */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		64D9C5FA1F67B1B9004486D7 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				64D9C5FB1F67B1B9004486D7 /* UIViewController+Campaign.h */,
+				64D9C5FC1F67B1B9004486D7 /* UIViewController+Campaign.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,8 +294,11 @@
 			files = (
 				6468645F1F6689F00086D39E /* ViewController.m in Sources */,
 				6468645C1F6689F00086D39E /* AppDelegate.m in Sources */,
+				64D9C5FD1F67B1B9004486D7 /* UIViewController+Campaign.m in Sources */,
 				646864711F6698CC0086D39E /* CampaignViewController.m in Sources */,
 				646864591F6689F00086D39E /* main.m in Sources */,
+				64D9C5F01F67AD35004486D7 /* APIManager.m in Sources */,
+				64D9C5F41F67ADD1004486D7 /* UtilForDebug.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8KPH929VA4;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = CampaignPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -384,6 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8KPH929VA4;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = CampaignPlatform/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
