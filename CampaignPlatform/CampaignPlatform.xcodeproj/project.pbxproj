@@ -15,10 +15,12 @@
 		646864641F6689F00086D39E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 646864631F6689F00086D39E /* Assets.xcassets */; };
 		646864671F6689F00086D39E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646864651F6689F00086D39E /* LaunchScreen.storyboard */; };
 		646864711F6698CC0086D39E /* CampaignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 646864701F6698CC0086D39E /* CampaignViewController.m */; };
-		646864731F6698E70086D39E /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 646864721F6698E70086D39E /* popup.html */; };
+		64AD44E41F67DD69003D50EA /* 1.html in Resources */ = {isa = PBXBuildFile; fileRef = 64AD44E21F67DD69003D50EA /* 1.html */; };
+		64AD44E51F67DD69003D50EA /* 2.html in Resources */ = {isa = PBXBuildFile; fileRef = 64AD44E31F67DD69003D50EA /* 2.html */; };
 		64D9C5F01F67AD35004486D7 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5EF1F67AD35004486D7 /* APIManager.m */; };
 		64D9C5F41F67ADD1004486D7 /* UtilForDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5F31F67ADD1004486D7 /* UtilForDebug.m */; };
 		64D9C5FD1F67B1B9004486D7 /* UIViewController+Campaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5FC1F67B1B9004486D7 /* UIViewController+Campaign.m */; };
+		64D9C6001F67D002004486D7 /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5FF1F67D002004486D7 /* OtherViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +38,8 @@
 		646864681F6689F00086D39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6468646F1F6698CC0086D39E /* CampaignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CampaignViewController.h; path = Campaign/CampaignViewController.h; sourceTree = "<group>"; };
 		646864701F6698CC0086D39E /* CampaignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CampaignViewController.m; path = Campaign/CampaignViewController.m; sourceTree = "<group>"; };
-		646864721F6698E70086D39E /* popup.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = popup.html; path = Campaign/popup.html; sourceTree = "<group>"; };
+		64AD44E21F67DD69003D50EA /* 1.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = 1.html; path = Campaign/1.html; sourceTree = "<group>"; };
+		64AD44E31F67DD69003D50EA /* 2.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = 2.html; path = Campaign/2.html; sourceTree = "<group>"; };
 		64D9C5EE1F67AD35004486D7 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		64D9C5EF1F67AD35004486D7 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		64D9C5F21F67ADD1004486D7 /* UtilForDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilForDebug.h; sourceTree = "<group>"; };
@@ -44,6 +47,8 @@
 		64D9C5F51F67AE0F004486D7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		64D9C5FB1F67B1B9004486D7 /* UIViewController+Campaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Campaign.h"; sourceTree = "<group>"; };
 		64D9C5FC1F67B1B9004486D7 /* UIViewController+Campaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Campaign.m"; sourceTree = "<group>"; };
+		64D9C5FE1F67D002004486D7 /* OtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherViewController.h; sourceTree = "<group>"; };
+		64D9C5FF1F67D002004486D7 /* OtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherViewController.m; sourceTree = "<group>"; };
 		D8BB91357D6E920C70D8573D /* libPods-CampaignPlatform.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CampaignPlatform.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,6 +108,8 @@
 				6468645B1F6689F00086D39E /* AppDelegate.m */,
 				6468645D1F6689F00086D39E /* ViewController.h */,
 				6468645E1F6689F00086D39E /* ViewController.m */,
+				64D9C5FE1F67D002004486D7 /* OtherViewController.h */,
+				64D9C5FF1F67D002004486D7 /* OtherViewController.m */,
 				64D9C5F51F67AE0F004486D7 /* PrefixHeader.pch */,
 				646864601F6689F00086D39E /* Main.storyboard */,
 				646864631F6689F00086D39E /* Assets.xcassets */,
@@ -124,7 +131,8 @@
 		6468646E1F6698AB0086D39E /* Campaign */ = {
 			isa = PBXGroup;
 			children = (
-				646864721F6698E70086D39E /* popup.html */,
+				64AD44E21F67DD69003D50EA /* 1.html */,
+				64AD44E31F67DD69003D50EA /* 2.html */,
 				6468646F1F6698CC0086D39E /* CampaignViewController.h */,
 				646864701F6698CC0086D39E /* CampaignViewController.m */,
 			);
@@ -230,9 +238,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64AD44E51F67DD69003D50EA /* 2.html in Resources */,
 				646864671F6689F00086D39E /* LaunchScreen.storyboard in Resources */,
-				646864731F6698E70086D39E /* popup.html in Resources */,
 				646864641F6689F00086D39E /* Assets.xcassets in Resources */,
+				64AD44E41F67DD69003D50EA /* 1.html in Resources */,
 				646864621F6689F00086D39E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6468645F1F6689F00086D39E /* ViewController.m in Sources */,
+				64D9C6001F67D002004486D7 /* OtherViewController.m in Sources */,
 				6468645C1F6689F00086D39E /* AppDelegate.m in Sources */,
 				64D9C5FD1F67B1B9004486D7 /* UIViewController+Campaign.m in Sources */,
 				646864711F6698CC0086D39E /* CampaignViewController.m in Sources */,

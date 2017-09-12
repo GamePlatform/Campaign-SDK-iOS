@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "CampaignViewController.h"
 
-@interface ViewController ()
+@interface ViewController () {
+    NSMutableArray *campaigns;
+}
 
 @end
 
@@ -18,11 +21,40 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [[APIManager sharedManager] getCampaigns:kInformStr appID:@"1" locationID:@"main" success:^(NSURLSessionTask *task, id obj) {
-        DLog(@"%@", obj);
+    [self getCampaigns];
+}
+
+- (IBAction)getCampaigns {
+    [[APIManager sharedManager] getCampaigns:kInformStr locationID:@"main" success:^(NSURLSessionTask *task, id obj) {
+        campaigns = [obj[@"campaigns"] mutableCopy];
+        campaigns = [[campaigns sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+            return [obj2[@"campaign_order"] compare:obj1[@"campaign_order"]];
+        }] mutableCopy];
+        [self presentCampaigns];
+        
     } failFromServer:nil completion:nil];
 }
 
+- (UIViewController* )getPresentedVC {
+    UIViewController *vc = self;
+    while (vc.presentedViewController) {
+        vc = vc.presentedViewController;
+    }
+    return vc;
+}
+
+- (void)presentCampaigns {
+    if (campaigns.count) {
+        CampaignViewController *vc = [CampaignViewController new];
+        [vc setInfo:campaigns.lastObject];
+        [campaigns removeLastObject];
+        [vc setModalPresentationStyle:(UIModalPresentationOverCurrentContext)];
+        [self.getPresentedVC presentViewController:vc animated:YES completion:^{
+            [self presentCampaigns];
+        }];
+        
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

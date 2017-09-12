@@ -21,7 +21,7 @@ typedef void (^ServiceResponseBlock)(NSDictionary *response, NSError *error);
 
 + (APIManager *)sharedManager;
 
-- (void)getCampaigns:(NSString*)inform appID:(NSString *)appID locationID:(NSString *)locationID
+- (void)getCampaigns:(NSString*)inform locationID:(NSString *)locationID
              success:(NetworkSucBlock)success failFromServer:(NetworkSucBlock)failure completion:(SimpleBlock)completion;
 
 @end

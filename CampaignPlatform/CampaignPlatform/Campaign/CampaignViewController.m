@@ -21,6 +21,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    DLog(@"%@", _info);
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:.3f]];
+    
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
     WKUserContentController *controller = [[WKUserContentController alloc] init];
     
@@ -31,11 +35,11 @@
     [configuration setUserContentController:controller];
     
     webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:configuration];
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"popup" withExtension:@"html"];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"%@", _info[@"template"]] withExtension:@"html"];
     
     NSURLComponents *components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
     [components setQueryItems:@[[NSURLQueryItem queryItemWithName:@"os" value:@"iOS"],
-                                [NSURLQueryItem queryItemWithName:@"img" value:@"https://www.allkpop.com/upload/2016/10/af_org/IU_1476317492_af_org.jpg"]]];
+                                [NSURLQueryItem queryItemWithName:@"img" value:_info[@"url"]]]];
     
     [webView loadRequest:[NSURLRequest requestWithURL:components.URL]];
     [webView setUIDelegate:self];
@@ -73,6 +77,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    DLog(@"");
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {

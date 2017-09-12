@@ -10,4 +10,6 @@
 
 @interface CampaignViewController : UIViewController
 
+@property NSDictionary* info;
+
 @end

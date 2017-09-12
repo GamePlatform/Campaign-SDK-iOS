@@ -180,9 +180,9 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
                         }];
 }
 
-- (void)getCampaigns:(NSString*)inform appID:(NSString *)appID locationID:(NSString *)locationID
+- (void)getCampaigns:(NSString*)inform locationID:(NSString *)locationID
              success:(NetworkSucBlock)success failFromServer:(NetworkSucBlock)failure completion:(SimpleBlock)completion; {
-    [self get:[NSString stringWithFormat:@"api/apps/%@/locations/%@", appID, locationID]
+    [self get:[NSString stringWithFormat:@"api/apps/1/locations/%@/campaigns", locationID]
    parameters:nil inform:inform success:success failFromServer:failure completion:completion];
 }
 @end

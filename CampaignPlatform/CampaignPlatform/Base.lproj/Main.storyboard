@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                                 <rect key="frame" x="164" y="318" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="Chf-2E-HIJ" kind="presentation" id="RD3-c1-Uf0"/>
+                                    <action selector="getCampaigns" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Ya-gz-SAS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -36,35 +37,92 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="Chf-2E-HIJ" kind="presentation" id="54c-JB-YR0"/>
+                        <segue destination="P6e-Aa-fME" kind="show" identifier="store1" id="h0G-5t-zLs"/>
+                        <segue destination="PT0-p0-fuX" kind="show" identifier="store2" id="NCf-EG-OLU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Campaign View Controller-->
-        <scene sceneID="t2B-yd-Upu">
+        <!--Other View Controller-->
+        <scene sceneID="7mj-Jk-IVr">
             <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="Chf-2E-HIJ" customClass="CampaignViewController" sceneMemberID="viewController">
+                <viewController id="P6e-Aa-fME" customClass="OtherViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="NVG-hp-gfg"/>
-                        <viewControllerLayoutGuide type="bottom" id="dYU-Ci-XvC"/>
+                        <viewControllerLayoutGuide type="top" id="727-VG-94B"/>
+                        <viewControllerLayoutGuide type="bottom" id="EuN-eg-k7a"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oIx-6D-Nml">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                    <view key="view" contentMode="scaleToFill" id="nl2-lY-9rj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6S-YA-TFp">
+                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="close:" destination="P6e-Aa-fME" eventType="touchUpInside" id="OOS-hW-wgl"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHn-VE-7aA">
+                                <rect key="frame" x="16" y="28" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eHn-VE-7aA" firstAttribute="top" secondItem="727-VG-94B" secondAttribute="bottom" constant="8" id="hg1-S0-NZC"/>
+                            <constraint firstItem="eHn-VE-7aA" firstAttribute="leading" secondItem="nl2-lY-9rj" secondAttribute="leadingMargin" id="k0u-pL-hhp"/>
+                            <constraint firstItem="w6S-YA-TFp" firstAttribute="centerY" secondItem="nl2-lY-9rj" secondAttribute="centerY" id="wGN-Yr-XS6"/>
+                            <constraint firstItem="w6S-YA-TFp" firstAttribute="centerX" secondItem="nl2-lY-9rj" secondAttribute="centerX" id="xHL-mc-D3j"/>
+                        </constraints>
                     </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="300"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O7p-aF-QiY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bXw-hQ-usj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2253" y="148"/>
+            <point key="canvasLocation" x="33" y="797"/>
+        </scene>
+        <!--Other View Controller-->
+        <scene sceneID="fKZ-0w-9b4">
+            <objects>
+                <viewController id="PT0-p0-fuX" customClass="OtherViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="02o-sa-uXR"/>
+                        <viewControllerLayoutGuide type="bottom" id="te2-y8-ZfC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gOY-X6-FrU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rZE-OH-uzf">
+                                <rect key="frame" x="164.5" y="318.5" width="46" height="30"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="close:" destination="PT0-p0-fuX" eventType="touchUpInside" id="dks-ld-DxF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tb-5P-hFx">
+                                <rect key="frame" x="16" y="28" width="51" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rZE-OH-uzf" firstAttribute="centerY" secondItem="gOY-X6-FrU" secondAttribute="centerY" id="1Mz-M6-g1j"/>
+                            <constraint firstItem="rZE-OH-uzf" firstAttribute="centerX" secondItem="gOY-X6-FrU" secondAttribute="centerX" id="GC9-fV-CN8"/>
+                            <constraint firstItem="1tb-5P-hFx" firstAttribute="top" secondItem="02o-sa-uXR" secondAttribute="bottom" constant="8" id="TAN-7y-hD2"/>
+                            <constraint firstItem="1tb-5P-hFx" firstAttribute="leading" secondItem="gOY-X6-FrU" secondAttribute="leadingMargin" id="XBK-vJ-iLe"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YjJ-Cf-05I" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="735" y="797"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="RD3-c1-Uf0"/>
-    </inferredMetricsTieBreakers>
 </document>
