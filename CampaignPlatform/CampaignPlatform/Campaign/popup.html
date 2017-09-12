@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        #wrapper {
+            position: absolute;
+            background-color: gray;
+            width: 98%;
+        }
+
+        #content {
+            float: left background-color: red;
+        }
+
+        #content img {
+            width: 100%
+        }
+
+        #checker {
+            float: right background-color: blue;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id=wrapper>
+        <div id=content>
+            <img id=img_view>
+        </div>
+        <div id=checker>
+            <input type="checkbox" id="no_more_to_see"> 오늘 하루 보지 않기
+            <button type="button" onclick="window.android.noMoreToSee(document.getElementById('no_more_to_see').checked);">확인</button>
+        </div>
+    </div>
+</body>
+
+<script>
+    var os;
+    $(document).ready(function () {
+        window.webkit.messageHandlers.campaign.postMessage('cam');
+        window.webkit.messageHandlers.log.postMessage(location.href);
+
+        var queries = {};
+        $.each(document.location.search.substr(1).split('&'), function (c, q) {
+            var i = q.split('=');
+            queries[i[0].toString()] = i[1].toString();
+        });
+
+        document.getElementById("img_view").src = queries["img"];
+        os = queries["os"];
+        exec('mhg', 'pppp');
+    });
+
+    function testEcho(str) {
+        console.log(str);
+    }
+
+    function exec(functionName, parameter) {
+        if (os == 'iOS')
+            window.webkit.messageHandlers.campaign.postMessage({
+                'func': functionName + ":",
+                'param': parameter
+            });
+        else if (os == 'AOS')
+            window.android[functionName](parameter);
+    }
+    //var url = android.getImageUrl()
+    //var div = document.getElementById("content")
+    //document.getElementById("img_view").src = url
+</script>
+
+</html>
