@@ -93,8 +93,9 @@
 
 #pragma mark - CallFromWebView
 
-- (void)mhg:(NSString *)str {
-    NSLog(@"여기: %@", str);
+- (void)close:(NSNumber *)noMoreToSee {
+    NSLog(@"%@", noMoreToSee);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

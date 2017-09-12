@@ -30,8 +30,8 @@
             <img id=img_view>
         </div>
         <div id=checker>
-            <input type="checkbox" id="no_more_to_see"> 오늘 하루 보지 않기
-            <button type="button" onclick="window.android.noMoreToSee(document.getElementById('no_more_to_see').checked);">확인</button>
+            <input type="checkbox" style="height:200px;width:200px" id="no_more_to_see"> 오늘 하루 보지 않기
+            <button type="button" style="height:200px;width:200px" onclick="exec('close',document.getElementById('no_more_to_see').checked);">확인</button>
         </div>
     </div>
 </body>
@@ -39,9 +39,6 @@
 <script>
     var os;
     $(document).ready(function () {
-        window.webkit.messageHandlers.campaign.postMessage('cam');
-        window.webkit.messageHandlers.log.postMessage(location.href);
-
         var queries = {};
         $.each(document.location.search.substr(1).split('&'), function (c, q) {
             var i = q.split('=');
@@ -50,7 +47,6 @@
 
         document.getElementById("img_view").src = queries["img"];
         os = queries["os"];
-        exec('mhg', 'pppp');
     });
 
     function testEcho(str) {
@@ -66,9 +62,6 @@
         else if (os == 'AOS')
             window.android[functionName](parameter);
     }
-    //var url = android.getImageUrl()
-    //var div = document.getElementById("content")
-    //document.getElementById("img_view").src = url
 </script>
 
 </html>
