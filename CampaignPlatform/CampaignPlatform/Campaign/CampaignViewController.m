@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 
 @interface CampaignViewController () <WKScriptMessageHandler, WKUIDelegate, WKNavigationDelegate> {
+    WKUserContentController *userContentController;
     WKWebView *webView;
 }
 
@@ -26,13 +27,13 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:0.f green:0.f blue:0.f alpha:.3f]];
     
     WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];
-    WKUserContentController *controller = [[WKUserContentController alloc] init];
+    userContentController = [[WKUserContentController alloc] init];
     
     // Add a script handler for the "campaign" call. This is added to every frame
     // in the document (window.webkit.messageHandlers.NAME).
-    [controller addScriptMessageHandler:self name:@"campaign"];
-    [controller addScriptMessageHandler:self name:@"log"];
-    [configuration setUserContentController:controller];
+    [userContentController addScriptMessageHandler:self name:@"campaign"];
+    [userContentController addScriptMessageHandler:self name:@"log"];
+    [configuration setUserContentController:userContentController];
     
     webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:configuration];
     NSURL *url = [[NSBundle mainBundle] URLForResource:[NSString stringWithFormat:@"%@", _info[@"template"]] withExtension:@"html"];
@@ -83,7 +84,7 @@
     DLog(@"");
 }
 
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+- (void)userContentController:(WKUserContentController *)userContentControllerP didReceiveScriptMessage:(WKScriptMessage *)message {
     // Check to make sure the name is correct
     if ([message.name isEqualToString:@"campaign"]) {
         // Log out the message received
@@ -103,6 +104,8 @@
 
 - (void)close:(NSNumber *)noMoreToSee {
     NSLog(@"%@", noMoreToSee);
+    [userContentController removeScriptMessageHandlerForName:@"campaign"];
+    [userContentController removeScriptMessageHandlerForName:@"log"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
