@@ -185,4 +185,5 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
     [self get:[NSString stringWithFormat:@"api/apps/1/locations/%@/campaigns", locationID]
    parameters:nil inform:inform success:success failFromServer:failure completion:completion];
 }
+
 @end

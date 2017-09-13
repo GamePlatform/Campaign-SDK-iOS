@@ -40,6 +40,7 @@
     
     NSURLComponents *components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
     [components setQueryItems:@[[NSURLQueryItem queryItemWithName:@"os" value:@"iOS"],
+                                [NSURLQueryItem queryItemWithName:@"redirect" value:[NSString stringWithFormat:@"store%@", _info[@"template"]]],
                                 [NSURLQueryItem queryItemWithName:@"img" value:_info[@"url"]]]];
     
     [webView loadRequest:[NSURLRequest requestWithURL:components.URL]];
@@ -102,11 +103,32 @@
 
 #pragma mark - CallFromWebView
 
-- (void)close:(NSNumber *)noMoreToSee {
-    NSLog(@"%@", noMoreToSee);
+- (void)closeWithCompletion:(SimpleBlock)completion {
     [userContentController removeScriptMessageHandlerForName:@"campaign"];
     [userContentController removeScriptMessageHandlerForName:@"log"];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (completion) {
+            completion();
+        }
+    }];
+}
+
+- (void)close:(NSNumber *)noMoreToSee {
+    NSLog(@"%@", noMoreToSee);
+    [self closeWithCompletion:nil];
+}
+
+- (void)redirect:(NSString *)redirect {
+    UIViewController *presentingViewController = self.presentingViewController;
+    if ([presentingViewController isKindOfClass:[CampaignViewController class]]) {
+        [self closeWithCompletion:^{
+            [(CampaignViewController *)presentingViewController redirect:redirect];
+        }];
+    } else {
+        [self closeWithCompletion:^{
+            [presentingViewController performSegueWithIdentifier:redirect sender:nil];
+        }];
+    }
 }
 
 @end
