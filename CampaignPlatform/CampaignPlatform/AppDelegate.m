@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     NSString *serverHost;
     serverHost = @"http://211.253.28.194/";
     serverHost = @"http://192.168.100.104:30022/";
@@ -49,6 +50,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    DLog(@"");
 }
 
 

@@ -185,7 +185,17 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
 }
 
 - (void)postReport:(NSString*)inform reportDictionary:(NSDictionary *)reportDictionary success:(NetworkSucBlock)success {
+    NSMutableDictionary *param = [reportDictionary mutableCopy];
+    [param setObject:_deviceID forKey:@"device_id"];
     [self post:[NSString stringWithFormat:@"api/apps/%@/report", _appID] parameters:reportDictionary inform:inform formData:nil progress:nil success:success failFromServer:nil completion:nil];
+}
+
+//NSLocale *currentLocale = [NSLocale currentLocale];  // get the current locale.
+//NSString *countryCode = [currentLocale objectForKey:NSLocaleCountryCode];
+
+- (void)postDeviceInfo:(NSString*)inform {
+    [self post:@"" parameters:@{@"os":@"iOS", @"devicd_id":_deviceID, @"app_id":_appID, @"country_code":[NSLocale.currentLocale objectForKey:NSLocaleCountryCode]}
+        inform:inform formData:nil progress:nil success:nil failFromServer:nil completion:nil];
 }
 
 @end

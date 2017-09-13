@@ -19,8 +19,11 @@ typedef void (^ServiceResponseBlock)(NSDictionary *response, NSError *error);
 @property (atomic, strong) UIAlertController *alertcon;
 @property (atomic, strong) NSString *serverHost;
 @property (atomic, strong) NSString *appID;
+@property (atomic, strong) NSString *deviceID;
 
 + (APIManager *)sharedManager;
+
+- (void)postDeviceInfo:(NSString*)inform;
 
 - (void)getCampaigns:(NSString*)inform locationID:(NSString *)locationID
              success:(NetworkSucBlock)success failFromServer:(NetworkSucBlock)failure completion:(SimpleBlock)completion;

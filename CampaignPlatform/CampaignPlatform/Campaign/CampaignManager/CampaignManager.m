@@ -38,8 +38,14 @@
 }
 
 - (void)startCampaignAdvisor:(NSString *)appID withServer:(NSString *)serverHost {
+    NSString* deviceKey = @"CampaignDeviceID";
+    if ([[NSUserDefaults standardUserDefaults] stringForKey:deviceKey])
+        [[NSUserDefaults standardUserDefaults] setObject:NSUUID.UUID.UUIDString forKey:deviceKey];
+    [[APIManager sharedManager] setDeviceID:[[NSUserDefaults standardUserDefaults] stringForKey:deviceKey]];
     [[APIManager sharedManager] setAppID:appID];
     [[APIManager sharedManager] setServerHost:serverHost];
+    [[APIManager sharedManager]  postDeviceInfo:kInformStr];
+    
     [self performSelector:@selector(sendReport) withObject:nil afterDelay:300.f];
 }
 
