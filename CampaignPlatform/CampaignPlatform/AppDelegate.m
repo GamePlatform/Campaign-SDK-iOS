@@ -17,6 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSString *serverHost;
+    serverHost = @"http://211.253.28.194/";
+    serverHost = @"http://192.168.100.104:30022/";
+    [[CampaignManager sharedManager] startCampaignAdvisor:@"1" withServer:serverHost];
     return YES;
 }
 

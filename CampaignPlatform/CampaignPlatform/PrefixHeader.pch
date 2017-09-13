@@ -15,5 +15,6 @@
 #import "UtilForDebug.h"
 #import "APIManager.h"
 #import "UIViewController+Campaign.h"
+#import "CampaignManager.h"
 
 #endif /* PrefixHeader_pch */

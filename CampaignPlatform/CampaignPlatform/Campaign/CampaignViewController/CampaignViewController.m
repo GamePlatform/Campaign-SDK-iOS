@@ -48,6 +48,8 @@
     
     [self.view addSubview:webView];
     [self setSizeWebView:CGSizeMake(200, 200)];
+    
+    [[CampaignManager sharedManager] addExposure:_info[@"campaign_id"]];
 }
 
 - (void)setFullWebView {
@@ -126,6 +128,7 @@
         }];
     } else {
         [self closeWithCompletion:^{
+            [[CampaignManager sharedManager] addPurchase:_info[@"campaign_id"]];
             [presentingViewController performSegueWithIdentifier:redirect sender:nil];
         }];
     }

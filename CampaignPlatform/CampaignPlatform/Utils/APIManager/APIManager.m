@@ -10,15 +10,13 @@
 @interface APIManager() {
     AFHTTPSessionManager *manager;
     AFHTTPSessionManager *jsonSerializerManager;
-    BOOL checkVersion;
-    NSString *svr_host;
 }
 
 @end
 
 @implementation APIManager
 
-+ (APIManager *)sharedManager{
++ (APIManager *)sharedManager {
     static dispatch_once_t pred;
     static APIManager *sharedInstance = nil;
 
@@ -29,11 +27,9 @@
     return sharedInstance;
 }
 
-- (id)init {
+- (instancetype)init {
     if (self = [super init]) {
         // do init here
-        svr_host = @"http://211.253.28.194/";
-        svr_host = @"http://192.168.100.104:30022/";
         _alertcon = [UIAlertController
                      alertControllerWithTitle:NSLocalizedString(@"global_popup_title", nil)
                      message:NSLocalizedString(@"network_disconnected", nil) preferredStyle:UIAlertControllerStyleAlert];
@@ -93,7 +89,7 @@
 - (void)get:(NSString*)url parameters:(NSDictionary*)parameters inform:(NSString*)inform
     success:(NetworkSucBlock)successCallback failFromServer:(NetworkSucBlock)failureCallback completion:(SimpleBlock)completion {
     
-    [manager GET:[NSString stringWithFormat:@"%@%@",svr_host, url] parameters:parameters progress:nil
+    [manager GET:[NSString stringWithFormat:@"%@%@",_serverHost, url] parameters:parameters progress:nil
          success:^(NSURLSessionTask *task, id obj){
              DLog(@"%@ success\ninform: %@\nobj: %@", url, inform, obj);
              if ([obj[@"code"] intValue]) {
@@ -123,7 +119,7 @@
     formData:(FormDataBlock)formDataCallback progress:(ProgressBlock)progressCallback
      success:(NetworkSucBlock)successCallback failFromServer:(NetworkSucBlock)failureCallback completion:(SimpleBlock)completion {
     
-    [manager POST:[NSString stringWithFormat:@"%@%@",svr_host, url] parameters:parameters
+    [manager POST:[NSString stringWithFormat:@"%@%@",_serverHost, url] parameters:parameters
 constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallback) formDataCallback(formData);}
          progress:^(NSProgress *uploadProgress){if(progressCallback) progressCallback(uploadProgress);}
           success:^(NSURLSessionTask *task, id obj){
@@ -153,7 +149,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
 
 - (void)postJsonSerializer:(NSString*)url parameters:(NSDictionary*)parameters inform:(NSString*)inform
                    success:(NetworkSucBlock)successCallback failFromServer:(NetworkSucBlock)failureCallback completion:(SimpleBlock)completion {
-    [jsonSerializerManager POST:[NSString stringWithFormat:@"%@%@",svr_host, url] parameters:parameters
+    [jsonSerializerManager POST:[NSString stringWithFormat:@"%@%@",_serverHost, url] parameters:parameters
                        progress:nil
                         success:^(NSURLSessionTask *task, id obj){
                             DLog(@"%@ success\ninform: %@\nobj: %@", url, inform, obj);
@@ -180,10 +176,16 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
                         }];
 }
 
+#pragma mark - All Kinds of API
+
 - (void)getCampaigns:(NSString*)inform locationID:(NSString *)locationID
              success:(NetworkSucBlock)success failFromServer:(NetworkSucBlock)failure completion:(SimpleBlock)completion; {
-    [self get:[NSString stringWithFormat:@"api/apps/1/locations/%@/campaigns", locationID]
+    [self get:[NSString stringWithFormat:@"api/apps/%@/locations/%@/campaigns", _appID, locationID]
    parameters:nil inform:inform success:success failFromServer:failure completion:completion];
+}
+
+- (void)postReport:(NSString*)inform reportDictionary:(NSDictionary *)reportDictionary success:(NetworkSucBlock)success {
+    [self post:[NSString stringWithFormat:@"api/apps/%@/report", _appID] parameters:reportDictionary inform:inform formData:nil progress:nil success:success failFromServer:nil completion:nil];
 }
 
 @end
