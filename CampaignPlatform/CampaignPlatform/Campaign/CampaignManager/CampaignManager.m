@@ -39,7 +39,7 @@
 
 - (void)startCampaignAdvisor:(NSString *)appID withServer:(NSString *)serverHost {
     NSString* deviceKey = @"CampaignDeviceID";
-    if ([[NSUserDefaults standardUserDefaults] stringForKey:deviceKey])
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:deviceKey])
         [[NSUserDefaults standardUserDefaults] setObject:NSUUID.UUID.UUIDString forKey:deviceKey];
     [[APIManager sharedManager] setDeviceID:[[NSUserDefaults standardUserDefaults] stringForKey:deviceKey]];
     [[APIManager sharedManager] setAppID:appID];
