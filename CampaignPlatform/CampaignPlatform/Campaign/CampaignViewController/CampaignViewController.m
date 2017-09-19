@@ -47,9 +47,9 @@
     [webView setUIDelegate:self];
     
     [self.view addSubview:webView];
-    [self setSizeWebView:CGSizeMake(200, 200)];
+    [self setSizeWebView:CGSizeMake(200, 500)];
     
-    [[CampaignManager sharedManager] addExposure:_info[@"campaign_id"]];
+    [CampaignManager.sharedManager addAnalytics:_info[@"campaign_id"] type:AnalyticsTypeExposure];
 }
 
 - (void)setFullWebView {
@@ -128,8 +128,13 @@
         }];
     } else {
         [self closeWithCompletion:^{
-            [[CampaignManager sharedManager] addPurchase:_info[@"campaign_id"]];
-            [presentingViewController performSegueWithIdentifier:redirect sender:nil];
+            [CampaignManager.sharedManager addAnalytics:_info[@"campaign_id"] type:AnalyticsTypePurchase];
+            @try {
+                [presentingViewController performSegueWithIdentifier:redirect sender:nil];
+            } @catch (NSException *exception) {
+                DLog(@"Segue Not Found");
+            } @finally { }
+            
         }];
     }
 }

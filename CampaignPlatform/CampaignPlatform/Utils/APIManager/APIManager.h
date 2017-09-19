@@ -28,6 +28,6 @@ typedef void (^ServiceResponseBlock)(NSDictionary *response, NSError *error);
 - (void)getCampaigns:(NSString*)inform locationID:(NSString *)locationID
              success:(NetworkSucBlock)success failFromServer:(NetworkSucBlock)failure completion:(SimpleBlock)completion;
 
-- (void)postReport:(NSString*)inform reportDictionary:(NSDictionary *)reportDictionary success:(NetworkSucBlock)success;
+- (void)postAnalytics:(NSString*)inform analytics:(NSArray *)analytics success:(NetworkSucBlock)success;
 
 @end

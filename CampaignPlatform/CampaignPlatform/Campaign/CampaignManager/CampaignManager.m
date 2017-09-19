@@ -9,8 +9,7 @@
 #import "CampaignManager.h"
 
 @interface CampaignManager() {
-    NSMutableDictionary *exposure;
-    NSMutableDictionary *purchase;
+    NSMutableArray *analytics;
 }
 
 @end
@@ -31,8 +30,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         // do init here
-        exposure = [NSMutableDictionary new];
-        purchase = [NSMutableDictionary new];
+        analytics = [NSMutableArray new];
     }
     return self;
 }
@@ -45,24 +43,15 @@
     [[APIManager sharedManager] setAppID:appID];
     [[APIManager sharedManager] setServerHost:serverHost];
     [[APIManager sharedManager]  postDeviceInfo:kInformStr];
-    
-    [self performSelector:@selector(sendReport) withObject:nil afterDelay:300.f];
 }
 
-- (void)sendReport {
-    [[APIManager sharedManager] postReport:kInformStr reportDictionary:@{@"exposure":exposure, @"purchase":purchase} success:^(NSURLSessionTask *task, id obj) {
-        exposure = [NSMutableDictionary new];
-        purchase = [NSMutableDictionary new];
-    }];
-    [self performSelector:@selector(sendReport) withObject:nil afterDelay:300.f];
-}
-
-- (void)addExposure:(NSString *)campaignID {
-    exposure[campaignID] = @([exposure[campaignID] integerValue] + 1);
-}
-
-- (void)addPurchase:(NSString *)campaignID {
-    purchase[campaignID] = @([purchase[campaignID] integerValue] + 1);
+- (void)addAnalytics:(NSString *)campaignID type:(AnalyticsTypeTag)type {
+    [analytics addObject:@{@"campaign_id":campaignID, @"type":@(type)}];
+    if (analytics.count > 3) {
+        [[APIManager sharedManager] postAnalytics:kInformStr analytics:analytics success:^(NSURLSessionTask *task, id obj) {
+            analytics = [NSMutableArray new];
+        }];
+    }
 }
 
 @end
