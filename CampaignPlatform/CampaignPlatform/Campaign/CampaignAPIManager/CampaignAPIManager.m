@@ -1,27 +1,26 @@
 //
-//  FBAPIManager.m
+//  CampaignAPIManager.m
 //
 //  Created by hyeongyun on 2016. 7. 25..
 //
 //
 
-#import "APIManager.h"
+#import "CampaignAPIManager.h"
 
-@interface APIManager() {
+@interface CampaignAPIManager() {
     AFHTTPSessionManager *manager;
-    AFHTTPSessionManager *jsonSerializerManager;
 }
 
 @end
 
-@implementation APIManager
+@implementation CampaignAPIManager
 
-+ (APIManager *)sharedManager {
++ (CampaignAPIManager *)sharedManager {
     static dispatch_once_t pred;
-    static APIManager *sharedInstance = nil;
+    static CampaignAPIManager *sharedInstance = nil;
 
     dispatch_once(&pred, ^{
-        sharedInstance = [[APIManager alloc] init];
+        sharedInstance = [[CampaignAPIManager alloc] init];
     });
     
     return sharedInstance;
@@ -30,43 +29,11 @@
 - (instancetype)init {
     if (self = [super init]) {
         // do init here
-        _alertcon = [UIAlertController
-                     alertControllerWithTitle:NSLocalizedString(@"global_popup_title", nil)
-                     message:NSLocalizedString(@"network_disconnected", nil) preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *goSetAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"network_settings", nil) style:UIAlertActionStyleDefault
-                                                            handler:^(UIAlertAction *action){
-                                                                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                                                            }];
-        
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"global_cancel", nil) style:UIAlertActionStyleCancel handler:nil];
-        [_alertcon addAction:goSetAction];
-        [_alertcon addAction:cancelAction];
         
         manager = [AFHTTPSessionManager manager];
-        jsonSerializerManager = [AFHTTPSessionManager manager];
-        
-        jsonSerializerManager.requestSerializer = [AFJSONRequestSerializer serializer];
-        jsonSerializerManager.responseSerializer = [AFJSONResponseSerializer serializer];
-        
-        [[manager requestSerializer] setValue:[[[NSLocale preferredLanguages] valueForKey:@"description"] componentsJoinedByString:@","]
-                           forHTTPHeaderField:@"Accept_Language"];
-        [[jsonSerializerManager requestSerializer] setValue:[[[NSLocale preferredLanguages] valueForKey:@"description"] componentsJoinedByString:@","]
-                                         forHTTPHeaderField:@"Accept_Language"];
     }
     return self;
 }
-
-//- (void)failNetworking:(NSString*)inform {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        if (!_alertcon.presentingViewController) {
-//            UIViewController *vc = [UIApplication.sharedApplication.windows.firstObject.rootViewController my_visibleViewController];
-//            if ([vc isKindOfClass:[UIAlertController class]] && [[(UIAlertController*)vc title] isEqualToString:NSLocalizedString(@"global_popup_title", nil)])
-//                return;
-//            [vc presentViewController:_alertcon animated:YES completion:nil];
-//        }
-//    });
-//}
 
 - (void)defaultGet:(NSString*)url parameters:(NSDictionary*)parameters inform:(NSString*)inform
            success:(NetworkSucBlock)successCallback failFromServer:(NetworkSucBlock)failureCallback completion:(SimpleBlock)completion {
@@ -84,7 +51,6 @@
                                         completion();
                                     if (_failNetworking)
                                         _failNetworking();
-//                                    [self failNetworking:inform];
                                 }];
 }
 
@@ -115,7 +81,6 @@
                  completion();
              if (_failNetworking)
                  _failNetworking();
-//             [self failNetworking:inform];
          }];
 }
 
@@ -149,47 +114,14 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
                   completion();
               if (_failNetworking)
                   _failNetworking();
-//              [self failNetworking:inform];
           }];
-}
-
-- (void)postJsonSerializer:(NSString*)url parameters:(NSDictionary*)parameters inform:(NSString*)inform
-                   success:(NetworkSucBlock)successCallback failFromServer:(NetworkSucBlock)failureCallback completion:(SimpleBlock)completion {
-    [jsonSerializerManager POST:[NSString stringWithFormat:@"%@%@",_serverHost, url] parameters:parameters
-                       progress:nil
-                        success:^(NSURLSessionTask *task, id obj){
-                            DLog(@"%@ success\ninform: %@\nobj: %@", url, inform, obj);
-                            if ([obj[@"code"] intValue]) {
-                                if (failureCallback)
-                                    failureCallback(task, obj);
-                                else {
-                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:url message:obj[@"msg"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                                    [alert DShow];
-                                }
-                            }
-                            else {
-                                if (successCallback)
-                                    successCallback(task, obj);
-                            }
-                            if(completion)
-                                completion();
-                        }
-                        failure:^(NSURLSessionTask *operation, NSError *error){
-                            DLog(@"failure: %ld\ninform: %@\noperation: %@\nerror: %@", ((NSHTTPURLResponse*)operation.response).statusCode, inform, operation, error);
-                            if(completion)
-                                completion();
-                            if (_failNetworking)
-                                _failNetworking();
-//                            [self failNetworking:inform];
-                        }];
 }
 
 #pragma mark - All Kinds of API
 
-- (void)getCampaigns:(NSString*)inform locationID:(NSString *)locationID
-             success:(NetworkSucBlock)success failFromServer:(NetworkSucBlock)failure completion:(SimpleBlock)completion; {
+- (void)getCampaigns:(NSString*)inform locationID:(NSString *)locationID success:(NetworkSucBlock)success {
     [self get:[NSString stringWithFormat:@"api/apps/%@/locations/%@/campaigns", _appID, locationID]
-   parameters:nil inform:inform success:success failFromServer:failure completion:completion];
+   parameters:nil inform:inform success:success failFromServer:nil completion:nil];
 }
 
 - (void)postAnalytics:(NSString*)inform analytics:(NSArray *)analytics success:(NetworkSucBlock)success {
@@ -202,7 +134,6 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
 }
 
 - (void)postDeviceInfo:(NSString*)inform {
-//    return;
     [self post:@"api/apps/1/locations" parameters:@{@"os":@"iOS", @"devicd_id":_deviceID, @"app_id":_appID, @"country_code":[NSLocale.currentLocale objectForKey:NSLocaleCountryCode]}
         inform:inform formData:nil progress:nil success:nil failFromServer:nil completion:nil];
 }

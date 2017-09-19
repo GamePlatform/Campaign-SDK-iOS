@@ -7,6 +7,7 @@
 //
 
 #import "CampaignManager.h"
+#import "CampaignAPIManager.h"
 
 @interface CampaignManager() {
     NSMutableArray *analytics;
@@ -39,16 +40,24 @@
     NSString* deviceKey = @"CampaignDeviceID";
     if (![[NSUserDefaults standardUserDefaults] stringForKey:deviceKey])
         [[NSUserDefaults standardUserDefaults] setObject:NSUUID.UUID.UUIDString forKey:deviceKey];
-    [[APIManager sharedManager] setDeviceID:[[NSUserDefaults standardUserDefaults] stringForKey:deviceKey]];
-    [[APIManager sharedManager] setAppID:appID];
-    [[APIManager sharedManager] setServerHost:serverHost];
-    [[APIManager sharedManager] postDeviceInfo:kInformStr];
+    [[CampaignAPIManager sharedManager] setDeviceID:[[NSUserDefaults standardUserDefaults] stringForKey:deviceKey]];
+    [[CampaignAPIManager sharedManager] setAppID:appID];
+    [[CampaignAPIManager sharedManager] setServerHost:serverHost];
+    [[CampaignAPIManager sharedManager] postDeviceInfo:kInformStr];
+}
+
+- (void)setFailNetworking:(SimpleBlock)failNetworking {
+    [CampaignAPIManager.sharedManager setFailNetworking:failNetworking];
+}
+
+- (void)getCampaigns:(NSString *)locationID success:(NetworkSucBlock)success {
+    [[CampaignAPIManager sharedManager] getCampaigns:kInformStr locationID:locationID success:success];
 }
 
 - (void)addAnalytics:(NSString *)campaignID type:(AnalyticsTypeTag)type {
     [analytics addObject:@{@"campaign_id":campaignID, @"type":@(type)}];
     if (analytics.count > 3) {
-        [[APIManager sharedManager] postAnalytics:kInformStr analytics:analytics success:^(NSURLSessionTask *task, id obj) {
+        [[CampaignAPIManager sharedManager] postAnalytics:kInformStr analytics:analytics success:^(NSURLSessionTask *task, id obj) {
             analytics = [NSMutableArray new];
         }];
     }

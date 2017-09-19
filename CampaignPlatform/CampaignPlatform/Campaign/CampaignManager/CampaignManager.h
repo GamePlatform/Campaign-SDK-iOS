@@ -14,11 +14,20 @@ typedef NS_ENUM(NSInteger, AnalyticsTypeTag) {
     AnalyticsTypePurchase
 };
 
+
+typedef void (^ProgressBlock)(NSProgress *uploadProgress);
+typedef void (^NetworkSucBlock)(NSURLSessionTask *task, id obj);
+typedef void (^ServiceResponseBlock)(NSDictionary *response, NSError *error);
+typedef void (^SimpleBlock)();
+
 @interface CampaignManager : NSObject
 
 + (CampaignManager *)sharedManager;
 
+@property (atomic, strong) SimpleBlock failNetworking;
+
 - (void)startCampaignAdvisor:(NSString *)appID withServer:(NSString *)serverHost;
+- (void)getCampaigns:(NSString *)locationID success:(NetworkSucBlock)success;
 - (void)addAnalytics:(NSString *)campaignID type:(AnalyticsTypeTag)type;
 
 @end

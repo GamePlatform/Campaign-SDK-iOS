@@ -25,14 +25,13 @@
 }
 
 - (IBAction)getCampaigns {
-    [[APIManager sharedManager] getCampaigns:kInformStr locationID:@"main" success:^(NSURLSessionTask *task, id obj) {
+    [CampaignManager.sharedManager getCampaigns:@"main" success:^(NSURLSessionTask *task, id obj) {
         campaigns = [obj[@"campaigns"] mutableCopy];
         campaigns = [[campaigns sortedArrayUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
             return [obj2[@"campaign_order"] compare:obj1[@"campaign_order"]];
         }] mutableCopy];
-        [self presentCampaigns];
-        
-    } failFromServer:nil completion:nil];
+        [self presentCampaigns];  
+    }];
 }
 
 - (UIViewController* )getPresentedVC {

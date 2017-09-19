@@ -9,7 +9,7 @@
 
 @interface UIViewController (Campaign)
 
-- (void)dismissAllPresentedViewController:(UIViewController*)presentedViewController completion:(SimpleBlock)completion;
+- (void)dismissAllPresentedViewController:(UIViewController*)presentedViewController completion:(void (^)(void))completion;
 - (UIViewController *)my_visibleViewController;
 
 @end

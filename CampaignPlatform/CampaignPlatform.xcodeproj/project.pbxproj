@@ -18,7 +18,7 @@
 		646864621F6689F00086D39E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646864601F6689F00086D39E /* Main.storyboard */; };
 		646864641F6689F00086D39E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 646864631F6689F00086D39E /* Assets.xcassets */; };
 		646864671F6689F00086D39E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646864651F6689F00086D39E /* LaunchScreen.storyboard */; };
-		64D9C5F01F67AD35004486D7 /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5EF1F67AD35004486D7 /* APIManager.m */; };
+		64CA46A21F70F9F7004F020C /* CampaignAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 64CA46A11F70F96C004F020C /* CampaignAPIManager.m */; };
 		64D9C5F41F67ADD1004486D7 /* UtilForDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5F31F67ADD1004486D7 /* UtilForDebug.m */; };
 		64D9C5FD1F67B1B9004486D7 /* UIViewController+Campaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5FC1F67B1B9004486D7 /* UIViewController+Campaign.m */; };
 		64D9C6001F67D002004486D7 /* OtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9C5FF1F67D002004486D7 /* OtherViewController.m */; };
@@ -43,8 +43,8 @@
 		646864631F6689F00086D39E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		646864661F6689F00086D39E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		646864681F6689F00086D39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		64D9C5EE1F67AD35004486D7 /* APIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
-		64D9C5EF1F67AD35004486D7 /* APIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
+		64CA46A01F70F96C004F020C /* CampaignAPIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CampaignAPIManager.h; sourceTree = "<group>"; };
+		64CA46A11F70F96C004F020C /* CampaignAPIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CampaignAPIManager.m; sourceTree = "<group>"; };
 		64D9C5F21F67ADD1004486D7 /* UtilForDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilForDebug.h; sourceTree = "<group>"; };
 		64D9C5F31F67ADD1004486D7 /* UtilForDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilForDebug.m; sourceTree = "<group>"; };
 		64D9C5F51F67AE0F004486D7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -89,6 +89,7 @@
 			children = (
 				642713DE1F68FF3F00D8DDF7 /* 1.html */,
 				642713DF1F68FF3F00D8DDF7 /* 2.html */,
+				64CA469F1F70F96C004F020C /* CampaignAPIManager */,
 				642713E01F68FF3F00D8DDF7 /* CampaignManager */,
 				642713E31F68FF3F00D8DDF7 /* CampaignViewController */,
 			);
@@ -160,23 +161,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		64CA469F1F70F96C004F020C /* CampaignAPIManager */ = {
+			isa = PBXGroup;
+			children = (
+				64CA46A01F70F96C004F020C /* CampaignAPIManager.h */,
+				64CA46A11F70F96C004F020C /* CampaignAPIManager.m */,
+			);
+			path = CampaignAPIManager;
+			sourceTree = "<group>";
+		};
 		64D9C5EC1F67AD35004486D7 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				64D9C5FA1F67B1B9004486D7 /* Category */,
 				64D9C5F11F67ADD1004486D7 /* Debug */,
-				64D9C5ED1F67AD35004486D7 /* APIManager */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		64D9C5ED1F67AD35004486D7 /* APIManager */ = {
-			isa = PBXGroup;
-			children = (
-				64D9C5EE1F67AD35004486D7 /* APIManager.h */,
-				64D9C5EF1F67AD35004486D7 /* APIManager.m */,
-			);
-			path = APIManager;
 			sourceTree = "<group>";
 		};
 		64D9C5F11F67ADD1004486D7 /* Debug */ = {
@@ -322,13 +322,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64CA46A21F70F9F7004F020C /* CampaignAPIManager.m in Sources */,
 				6468645F1F6689F00086D39E /* ViewController.m in Sources */,
 				64D9C6001F67D002004486D7 /* OtherViewController.m in Sources */,
 				642713E91F68FF3F00D8DDF7 /* CampaignViewController.m in Sources */,
 				6468645C1F6689F00086D39E /* AppDelegate.m in Sources */,
 				64D9C5FD1F67B1B9004486D7 /* UIViewController+Campaign.m in Sources */,
 				646864591F6689F00086D39E /* main.m in Sources */,
-				64D9C5F01F67AD35004486D7 /* APIManager.m in Sources */,
 				64D9C5F41F67ADD1004486D7 /* UtilForDebug.m in Sources */,
 				642713E81F68FF3F00D8DDF7 /* CampaignManager.m in Sources */,
 			);

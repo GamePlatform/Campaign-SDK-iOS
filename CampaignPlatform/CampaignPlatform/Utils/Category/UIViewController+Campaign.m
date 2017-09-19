@@ -9,7 +9,7 @@
 
 @implementation UIViewController (Campaign)
 
-- (void)dismissAllPresentedViewController:(UIViewController*)originalVC completion:(SimpleBlock)completion {
+- (void)dismissAllPresentedViewController:(UIViewController*)originalVC completion:(void (^)(void))completion {
     DLog(@"self: %@\nself.presentedViewController: %@", self, self.presentedViewController);
     
     if (self.presentedViewController)
