@@ -57,16 +57,16 @@
     return self;
 }
 
-- (void)failNetworking:(NSString*)inform {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (!_alertcon.presentingViewController) {
-            UIViewController *vc = [UIApplication.sharedApplication.windows.firstObject.rootViewController my_visibleViewController];
-            if ([vc isKindOfClass:[UIAlertController class]] && [[(UIAlertController*)vc title] isEqualToString:NSLocalizedString(@"global_popup_title", nil)])
-                return;
-            [vc presentViewController:_alertcon animated:YES completion:nil];
-        }
-    });
-}
+//- (void)failNetworking:(NSString*)inform {
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (!_alertcon.presentingViewController) {
+//            UIViewController *vc = [UIApplication.sharedApplication.windows.firstObject.rootViewController my_visibleViewController];
+//            if ([vc isKindOfClass:[UIAlertController class]] && [[(UIAlertController*)vc title] isEqualToString:NSLocalizedString(@"global_popup_title", nil)])
+//                return;
+//            [vc presentViewController:_alertcon animated:YES completion:nil];
+//        }
+//    });
+//}
 
 - (void)defaultGet:(NSString*)url parameters:(NSDictionary*)parameters inform:(NSString*)inform
            success:(NetworkSucBlock)successCallback failFromServer:(NetworkSucBlock)failureCallback completion:(SimpleBlock)completion {
@@ -82,7 +82,9 @@
                                     DLog(@"failure: %ld\ninform: %@\noperation: %@\nerror: %@", ((NSHTTPURLResponse*)operation.response).statusCode, inform, operation, error);
                                     if(completion)
                                         completion();
-                                    [self failNetworking:inform];
+                                    if (_failNetworking)
+                                        _failNetworking();
+//                                    [self failNetworking:inform];
                                 }];
 }
 
@@ -111,7 +113,9 @@
              DLog(@"failure: %ld\ninform: %@\noperation: %@\nerror: %@", ((NSHTTPURLResponse*)operation.response).statusCode, inform, operation, error);
              if(completion)
                  completion();
-             [self failNetworking:inform];
+             if (_failNetworking)
+                 _failNetworking();
+//             [self failNetworking:inform];
          }];
 }
 
@@ -143,7 +147,9 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
               DLog(@"failure: %ld\ninform: %@\noperation: %@\nerror: %@", ((NSHTTPURLResponse*)operation.response).statusCode, inform, operation, error);
               if(completion)
                   completion();
-              [self failNetworking:inform];
+              if (_failNetworking)
+                  _failNetworking();
+//              [self failNetworking:inform];
           }];
 }
 
@@ -172,7 +178,9 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
                             DLog(@"failure: %ld\ninform: %@\noperation: %@\nerror: %@", ((NSHTTPURLResponse*)operation.response).statusCode, inform, operation, error);
                             if(completion)
                                 completion();
-                            [self failNetworking:inform];
+                            if (_failNetworking)
+                                _failNetworking();
+//                            [self failNetworking:inform];
                         }];
 }
 
@@ -194,7 +202,7 @@ constructingBodyWithBlock:^(id<AFMultipartFormData> formData){if(formDataCallbac
 }
 
 - (void)postDeviceInfo:(NSString*)inform {
-    return;
+//    return;
     [self post:@"api/apps/1/locations" parameters:@{@"os":@"iOS", @"devicd_id":_deviceID, @"app_id":_appID, @"country_code":[NSLocale.currentLocale objectForKey:NSLocaleCountryCode]}
         inform:inform formData:nil progress:nil success:nil failFromServer:nil completion:nil];
 }

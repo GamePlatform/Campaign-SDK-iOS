@@ -20,6 +20,7 @@ typedef void (^ServiceResponseBlock)(NSDictionary *response, NSError *error);
 @property (atomic, strong) NSString *serverHost;
 @property (atomic, strong) NSString *appID;
 @property (atomic, strong) NSString *deviceID;
+@property (atomic, strong) SimpleBlock failNetworking;
 
 + (APIManager *)sharedManager;
 

@@ -42,7 +42,7 @@
     [[APIManager sharedManager] setDeviceID:[[NSUserDefaults standardUserDefaults] stringForKey:deviceKey]];
     [[APIManager sharedManager] setAppID:appID];
     [[APIManager sharedManager] setServerHost:serverHost];
-    [[APIManager sharedManager]  postDeviceInfo:kInformStr];
+    [[APIManager sharedManager] postDeviceInfo:kInformStr];
 }
 
 - (void)addAnalytics:(NSString *)campaignID type:(AnalyticsTypeTag)type {

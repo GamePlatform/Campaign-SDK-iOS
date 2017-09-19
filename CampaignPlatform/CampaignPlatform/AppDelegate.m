@@ -22,6 +22,29 @@
     serverHost = @"http://211.253.28.194/";
     serverHost = @"http://192.168.100.104:30022/";
     [[CampaignManager sharedManager] startCampaignAdvisor:@"1" withServer:serverHost];
+    [[APIManager sharedManager] setFailNetworking:^{
+        DLog(@"");
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            UIAlertController *alertcon = [UIAlertController
+//                                           alertControllerWithTitle:NSLocalizedString(@"global_popup_title", nil)
+//                                           message:NSLocalizedString(@"network_disconnected", nil) preferredStyle:UIAlertControllerStyleAlert];
+//
+//            UIAlertAction *goSetAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"network_settings", nil) style:UIAlertActionStyleDefault
+//                                                                handler:^(UIAlertAction *action){
+//                                                                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//                                                                }];
+//
+//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"global_cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+//            [alertcon addAction:goSetAction];
+//            [alertcon addAction:cancelAction];
+//
+//            UIViewController *vc = [UIApplication.sharedApplication.windows.firstObject.rootViewController my_visibleViewController];
+//            if ([vc isKindOfClass:[UIAlertController class]] && [[(UIAlertController*)vc title] isEqualToString:NSLocalizedString(@"global_popup_title", nil)])
+//                return;
+//
+//            [vc presentViewController:alertcon animated:YES completion:nil];
+//        });
+    }];
     return YES;
 }
 
