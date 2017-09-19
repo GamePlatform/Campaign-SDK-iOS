@@ -24,9 +24,8 @@ typedef void (^SimpleBlock)();
 
 + (CampaignManager *)sharedManager;
 
-@property (atomic, strong) SimpleBlock failNetworking;
-
 - (void)startCampaignAdvisor:(NSString *)appID withServer:(NSString *)serverHost;
+- (void)setFailNetworking:(SimpleBlock)failNetworking;
 - (void)getCampaigns:(NSString *)locationID success:(NetworkSucBlock)success;
 - (void)addAnalytics:(NSString *)campaignID type:(AnalyticsTypeTag)type;
 

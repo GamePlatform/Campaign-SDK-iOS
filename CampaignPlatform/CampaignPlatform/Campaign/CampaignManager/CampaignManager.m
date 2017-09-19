@@ -9,8 +9,11 @@
 #import "CampaignManager.h"
 #import "CampaignAPIManager.h"
 
+#define kdeviceKey @"CampaignDeviceID"
+#define kanalyticsKey @"CampaignAnalytics"
+
 @interface CampaignManager() {
-    NSMutableArray *analytics;
+//    NSMutableArray *analytics;
 }
 
 @end
@@ -31,16 +34,17 @@
 - (instancetype)init {
     if (self = [super init]) {
         // do init here
-        analytics = [NSMutableArray new];
+//        analytics = [NSMutableArray new];
     }
     return self;
 }
 
 - (void)startCampaignAdvisor:(NSString *)appID withServer:(NSString *)serverHost {
-    NSString* deviceKey = @"CampaignDeviceID";
-    if (![[NSUserDefaults standardUserDefaults] stringForKey:deviceKey])
-        [[NSUserDefaults standardUserDefaults] setObject:NSUUID.UUID.UUIDString forKey:deviceKey];
-    [[CampaignAPIManager sharedManager] setDeviceID:[[NSUserDefaults standardUserDefaults] stringForKey:deviceKey]];
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:kdeviceKey])
+        [[NSUserDefaults standardUserDefaults] setObject:NSUUID.UUID.UUIDString forKey:kdeviceKey];
+    if (![[NSUserDefaults standardUserDefaults] arrayForKey:kanalyticsKey])
+        [[NSUserDefaults standardUserDefaults] setObject:@[] forKey:kanalyticsKey];
+    [[CampaignAPIManager sharedManager] setDeviceID:[[NSUserDefaults standardUserDefaults] stringForKey:kdeviceKey]];
     [[CampaignAPIManager sharedManager] setAppID:appID];
     [[CampaignAPIManager sharedManager] setServerHost:serverHost];
     [[CampaignAPIManager sharedManager] postDeviceInfo:kInformStr];
@@ -55,10 +59,12 @@
 }
 
 - (void)addAnalytics:(NSString *)campaignID type:(AnalyticsTypeTag)type {
-    [analytics addObject:@{@"campaign_id":campaignID, @"type":@(type)}];
-    if (analytics.count > 3) {
-        [[CampaignAPIManager sharedManager] postAnalytics:kInformStr analytics:analytics success:^(NSURLSessionTask *task, id obj) {
-            analytics = [NSMutableArray new];
+    NSMutableArray* analyticsArr = [[[NSUserDefaults standardUserDefaults] arrayForKey:kanalyticsKey] mutableCopy];
+    [analyticsArr addObject:@{@"campaign_id":campaignID, @"type":@(type)}];
+    [[NSUserDefaults standardUserDefaults] setObject:analyticsArr forKey:kanalyticsKey];
+    if (analyticsArr.count > 3) {
+        [[CampaignAPIManager sharedManager] postAnalytics:kInformStr analytics:analyticsArr success:^(NSURLSessionTask *task, id obj) {
+            [[NSUserDefaults standardUserDefaults] setObject:@[] forKey:kanalyticsKey];
         }];
     }
 }
